@@ -26,7 +26,7 @@ A premium, fully-functional browser-based phone dialer powered by **Twilio Voice
 1. **Create an API Key**: Go to Account → API Keys → Create API Key. Save the **SID** and **Secret**.
 2. **Create a TwiML App**: Go to Voice → TwiML → TwiML Apps → Create new.
    - Name: `Voice Dialer`
-   - Voice Request URL: `https://YOUR-VERCEL-DOMAIN/api/voice` (set after deploying)
+   - Voice Request URL: `https://twilio-voice-dialer-pwa-final.vercel.app/api/voice` (update with your actual Vercel domain)
    - Method: `POST`
 3. Note down your **TwiML App SID** (starts with `AP`).
 
@@ -59,7 +59,7 @@ Open [http://localhost:3000](http://localhost:3000).
 2. Import the project on [Vercel](https://vercel.com/new)
 3. Add all environment variables in Vercel's project settings
 4. Deploy
-5. **Update your TwiML App's Voice URL** in Twilio Console to: `https://your-project.vercel.app/api/voice`
+5. **Update your TwiML App's Voice URL** in Twilio Console to: `https://twilio-voice-dialer-pwa-final.vercel.app/api/voice`
 
 ## Tech Stack
 
