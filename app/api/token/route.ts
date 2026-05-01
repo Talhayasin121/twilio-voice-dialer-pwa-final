@@ -12,16 +12,24 @@ export async function GET() {
     const twimlAppSid = process.env.TWILIO_TWIML_APP_SID;
 
     if (!accountSid || !apiKey || !apiSecret || !twimlAppSid) {
-      console.error("Missing Twilio credentials:", {
-        accountSid: !!accountSid,
-        apiKey: !!apiKey,
-        apiSecret: !!apiSecret,
-        twimlAppSid: !!twimlAppSid,
+      console.error("Environment variables check failed:", {
+        accountSid: accountSid ? `Present (len: ${accountSid.length})` : "MISSING",
+        apiKey: apiKey ? `Present (len: ${apiKey.length})` : "MISSING",
+        apiSecret: apiSecret ? `Present (len: ${apiSecret.length})` : "MISSING",
+        twimlAppSid: twimlAppSid ? `Present (len: ${twimlAppSid.length})` : "MISSING",
       });
       return NextResponse.json(
         { error: "Missing Twilio credentials in environment variables" },
         { status: 500 }
       );
+    }
+
+    // Safety check for common mistakes
+    if (apiSecret.startsWith("SK")) {
+      console.error("ERROR: TWILIO_API_SECRET should not start with 'SK'. That is the API Key SID.");
+    }
+    if (apiKey.startsWith("AC")) {
+      console.error("ERROR: TWILIO_API_KEY should start with 'SK', not 'AC'.");
     }
 
     const identity = `dialer-user-${Date.now()}`;
